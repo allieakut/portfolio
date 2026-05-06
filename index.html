@@ -192,7 +192,7 @@ footer span{color:var(--sage)}
 <section id="about">
   <div class="about-inner">
     <div class="about-img-wrap">
-      <img src="profilepic_n.jpg" alt="Allieza Ena"/>
+      <img src="profilepic.n.jpg" alt="Allieza Ena"/>
       <div class="about-img-deco"></div>
     </div>
     <div class="about-text">
@@ -215,14 +215,15 @@ footer span{color:var(--sage)}
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Let's work together</h2>
     <p>Have a project in mind? I'd love to hear about it. Send me a message and let's create something beautiful together.</p>
-    <div class="contact-form">
+    <div class="contact-form" id="contactForm">
       <div class="form-row">
-        <input type="text" placeholder="Your Name"/>
-        <input type="email" placeholder="Your Email"/>
+        <input type="text" name="name" placeholder="Your Name" required/>
+        <input type="email" name="email" placeholder="Your Email" required/>
       </div>
-      <input type="text" placeholder="Subject"/>
-      <textarea placeholder="Tell me about your project..."></textarea>
-      <button class="btn">Send Message</button>
+      <input type="text" name="subject" placeholder="Subject" required/>
+      <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+      <button class="btn" id="submitBtn" onclick="submitForm(event)">Send Message</button>
+      <p id="formMsg" style="text-align:center;font-size:0.88rem;margin-top:0.5rem;display:none"></p>
     </div>
     <p style="margin-top:1.5rem;font-size:0.88rem;color:var(--text-muted)">Or reach me directly at <a href="mailto:alliezaena8@gmail.com" style="color:var(--sage-dark);text-decoration:none">alliezaena8@gmail.com</a></p>
     <div class="socials">
@@ -407,6 +408,42 @@ document.addEventListener('keydown', e => {
   if(e.key==='ArrowLeft') document.getElementById('lbPrev').click();
   if(e.key==='ArrowRight') document.getElementById('lbNext').click();
 });
+
+async function submitForm(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+  const form = document.getElementById('contactForm');
+  const data = {
+    name: form.querySelector('[name="name"]').value,
+    email: form.querySelector('[name="email"]').value,
+    subject: form.querySelector('[name="subject"]').value,
+    message: form.querySelector('[name="message"]').value
+  };
+  if(!data.name||!data.email||!data.message){
+    msg.style.display='block';msg.style.color='#c0392b';
+    msg.textContent='Please fill in all required fields.';return;
+  }
+  btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const res = await fetch('https://formspree.io/f/xvzlrvzw',{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    });
+    if(res.ok){
+      msg.style.display='block';msg.style.color='var(--sage-dark)';
+      msg.textContent='✓ Message sent! I\'ll get back to you soon.';
+      form.querySelectorAll('input,textarea').forEach(el=>el.value='');
+      btn.textContent='Send Message';btn.disabled=false;
+    } else {
+      throw new Error();
+    }
+  } catch{
+    msg.style.display='block';msg.style.color='#c0392b';
+    msg.textContent='Something went wrong. Please email me directly.';
+    btn.textContent='Send Message';btn.disabled=false;
+  }
+}
 
 function closeLb(){
   lb.classList.remove('open');
