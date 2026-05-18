@@ -14,14 +14,12 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
-/* NAV */
 nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(250,249,247,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(138,158,138,0.15)}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;letter-spacing:0.05em;color:var(--text)}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.3s}
 .nav-links a:hover{color:var(--sage-dark)}
 
-/* HERO */
 #hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 5%;position:relative;overflow:hidden}
 .hero-tag{font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.2s forwards}
 .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,10vw,8rem);font-weight:300;line-height:1;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.2rem;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
@@ -35,13 +33,11 @@ nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 5%;display:flex;j
 .hero-deco{position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(138,158,138,0.2);top:-100px;right:-100px;pointer-events:none}
 .hero-deco2{position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(138,158,138,0.15);bottom:-80px;left:-80px;pointer-events:none}
 
-/* SECTIONS */
 section{padding:6rem 8%}
 .section-label{font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:0.8rem}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:400;line-height:1.1;margin-bottom:3rem}
 .divider{width:40px;height:2px;background:var(--sage);margin:1rem 0 2.5rem}
 
-/* SERVICES */
 #services{background:var(--bg2)}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
 .service-card{background:var(--white);padding:2.2rem 1.8rem;border-radius:12px;border:1px solid rgba(138,158,138,0.15);transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
@@ -52,9 +48,14 @@ section{padding:6rem 8%}
 
 /* WORK */
 #work{background:var(--bg)}
-.filter-tabs{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.5rem}
-.filter-btn{padding:0.5rem 1.3rem;border-radius:50px;border:1px solid rgba(138,158,138,0.4);background:transparent;font-family:'DM Sans',sans-serif;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all 0.3s}
-.filter-btn:hover,.filter-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+
+/* Level 1 - main category tabs */
+.main-tabs{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem}
+.main-tab{padding:0.55rem 1.4rem;border-radius:50px;border:1px solid rgba(138,158,138,0.4);background:transparent;font-family:'DM Sans',sans-serif;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all 0.3s}
+.main-tab:hover,.main-tab.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
+
+
+
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
 .project-card{border-radius:14px;overflow:hidden;cursor:pointer;background:var(--white);box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:none}
 .project-card.visible{display:block}
@@ -70,7 +71,6 @@ section{padding:6rem 8%}
 .project-cat{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:0.3rem}
 .project-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500}
 
-/* LIGHTBOX */
 .lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:2rem}
 .lightbox.open{display:flex}
 .lb-inner{position:relative;max-width:900px;width:100%;max-height:90vh;display:flex;flex-direction:column;gap:1rem}
@@ -83,13 +83,12 @@ section{padding:6rem 8%}
 .lb-thumbs{display:flex;gap:0.5rem;overflow-x:auto;flex:1;padding:0.2rem 0}
 .lb-thumbs::-webkit-scrollbar{height:3px}
 .lb-thumbs::-webkit-scrollbar-thumb{background:var(--sage);border-radius:2px}
-.lb-thumb{width:60px;height:45px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:0.5;transition:opacity 0.3s;flex-shrink:0;border:2px solid transparent}
+.lb-thumb{width:60px;height:45px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:0.5;transition:opacity 0.3s;flex-shrink:0;border:2px solid transparent;background:#333}
 .lb-thumb.active{opacity:1;border-color:var(--sage)}
 .lb-info{color:#fff;text-align:center}
 .lb-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400}
 .lb-info p{font-size:0.78rem;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase}
 
-/* ABOUT */
 #about{background:var(--bg2)}
 .about-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center}
 .about-img-wrap{position:relative}
@@ -100,7 +99,6 @@ section{padding:6rem 8%}
 .stat h4{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:var(--sage-dark)}
 .stat p{font-size:0.78rem;color:var(--text-muted);letter-spacing:0.05em}
 
-/* CONTACT */
 #contact{text-align:center}
 .contact-inner{max-width:560px;margin:0 auto}
 .contact-inner .section-title{margin-bottom:0.5rem}
@@ -120,7 +118,6 @@ footer span{color:var(--sage)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
-
 @media(max-width:768px){
   .nav-links{display:none}
   .about-inner{grid-template-columns:1fr;gap:2.5rem}
@@ -142,8 +139,7 @@ footer span{color:var(--sage)}
 </nav>
 
 <section id="hero">
-  <div class="hero-deco"></div>
-  <div class="hero-deco2"></div>
+  <div class="hero-deco"></div><div class="hero-deco2"></div>
   <p class="hero-tag">Graphic Designer</p>
   <h1 class="hero-name">Allieza <span>Ena</span></h1>
   <p class="hero-sub">Crafting thoughtful visual identities and beautiful design experiences that leave a lasting impression.</p>
@@ -156,7 +152,7 @@ footer span{color:var(--sage)}
   <h2 class="section-title">Services</h2>
   <div class="services-grid">
     <div class="service-card"><div class="service-icon">🎨</div><h3>Brand Identity</h3><p>Logos, color systems, and visual language that communicate your brand's essence with clarity and style.</p></div>
-    <div class="service-card"><div class="service-icon">🖨️</div><h3>Print Design</h3><p>Brochures, packaging, posters, and editorial layouts crafted with precision and creativity.</p></div>
+    <div class="service-card"><div class="service-icon">🖨️</div><h3>Print & Apparel Design</h3><p>Brochures, packaging, posters, and editorial layouts crafted with precision — plus custom apparel printing and design for merch, uniforms, and branded clothing.</p></div>
     <div class="service-card"><div class="service-icon">📱</div><h3>Social Media Graphics</h3><p>Eye-catching content designed to elevate your brand presence across all digital platforms.</p></div>
     <div class="service-card"><div class="service-icon">✏️</div><h3>Typography & Layout</h3><p>Clean, considered typographic compositions and layouts that balance beauty with function.</p></div>
   </div>
@@ -165,17 +161,12 @@ footer span{color:var(--sage)}
 <section id="work">
   <p class="section-label">Portfolio</p>
   <h2 class="section-title">Selected Work</h2>
-  <div class="filter-tabs">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="branding">Branding</button>
-    <button class="filter-btn" data-filter="print">Print</button>
-    <button class="filter-btn" data-filter="social">Social Media</button>
-    <button class="filter-btn" data-filter="packaging">Packaging</button>
-  </div>
+
+  <div class="main-tabs" id="mainTabs"></div>
+
   <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lb-inner">
     <button class="lb-close" id="lbClose">✕</button>
@@ -227,10 +218,7 @@ footer span{color:var(--sage)}
     </div>
     <p style="margin-top:1.5rem;font-size:0.88rem;color:var(--text-muted)">Or reach me directly at <a href="mailto:alliezaena8@gmail.com" style="color:var(--sage-dark);text-decoration:none">alliezaena8@gmail.com</a></p>
     <div class="socials">
-      <a href="#">Instagram</a>
-      <a href="#">Behance</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Dribbble</a>
+      <a href="#">Instagram</a><a href="#">Behance</a><a href="#">LinkedIn</a><a href="#">Dribbble</a>
     </div>
   </div>
 </section>
@@ -240,99 +228,131 @@ footer span{color:var(--sage)}
 </footer>
 
 <script>
-// ── PROJECT DATA ──────────────────────────────────────────
-// To add your real files, replace the `files` arrays with your actual filenames.
-// Images: 'works/filename.jpg'   Videos: 'works/filename.mp4'
-// Set type:'video' for video files.
+// ═══════════════════════════════════════════════
+// PROJECT DATA
+// category: main tab key
+// client:   sub-tab name (the company/client name)
+// Replace placeholder names & filenames with your real ones!
+// ═══════════════════════════════════════════════
 const projects = [
-  {
-    title:'Verdant Studio Rebrand',cat:'Branding',filter:'branding',
-    files:[
-      {src:'works/branding1-1.jpg',type:'image'},
-      {src:'works/branding1-2.jpg',type:'image'},
-      {src:'works/branding1-3.jpg',type:'image'},
-    ]
-  },
-  {
-    title:'Real Estate',cat:'Social Media',filter:'social',
-    files:[
-      {src:'video1.mp4',type:'video'},
-      {src:'video2.mp4',type:'video'},
-      {src:'video3.mp4',type:'video'},
-    ]
-  },
-  {
-    title:'Lumière Skincare',cat:'Packaging',filter:'packaging',
-    files:[
-      {src:'works/pack1-1.jpg',type:'image'},
-      {src:'works/pack1-2.jpg',type:'image'},
-    ]
-  },
-  {
-    title:'Aria Event Posters',cat:'Print',filter:'print',
-    files:[
-      {src:'works/print1-1.jpg',type:'image'},
-      {src:'works/print1-2.jpg',type:'image'},
-      {src:'works/print1-3.jpg',type:'image'},
-    ]
-  },
-  {
-    title:'Root & Branch Co.',cat:'Branding',filter:'branding',
-    files:[
-      {src:'works/branding2-1.jpg',type:'image'},
-      {src:'works/branding2-2.jpg',type:'image'},
-    ]
-  },
-  {
-    title:'Clarity Magazine',cat:'Print',filter:'print',
-    files:[
-      {src:'works/print2-1.jpg',type:'image'},
-      {src:'works/print2-2.jpg',type:'image'},
-    ]
-  },
+  // ── BRANDING ──
+  { title:'Brand Launch', category:'branding', client:'Client A', files:[
+    {src:'works/branding-a1.jpg',type:'image'},
+    {src:'works/branding-a2.jpg',type:'image'},
+  ]},
+  { title:'Visual Identity', category:'branding', client:'Client B', files:[
+    {src:'works/branding-b1.jpg',type:'image'},
+    {src:'works/branding-b2.jpg',type:'image'},
+    {src:'works/branding-b3.jpg',type:'image'},
+  ]},
+  { title:'Logo & Style Guide', category:'branding', client:'Client C', files:[
+    {src:'works/branding-c1.jpg',type:'image'},
+    {src:'works/branding-c2.jpg',type:'image'},
+  ]},
+
+  // ── PRINT ──
+  { title:'Event Posters', category:'print', client:'Client A', files:[
+    {src:'works/print-a1.jpg',type:'image'},
+    {src:'works/print-a2.jpg',type:'image'},
+  ]},
+  { title:'Magazine Layout', category:'print', client:'Client B', files:[
+    {src:'works/print-b1.jpg',type:'image'},
+    {src:'works/print-b2.jpg',type:'image'},
+  ]},
+
+  // ── SOCIAL MEDIA ──
+  { title:'Social Media Content', category:'social', client:'Client A', files:[
+    {src:'works/social-a1.jpg',type:'image'},
+    {src:'works/social-a2.jpg',type:'image'},
+    {src:'works/social-a3.jpg',type:'image'},
+  ]},
+  { title:'Social Media Content', category:'social', client:'Client B', files:[
+    {src:'works/social-b1.jpg',type:'image'},
+    {src:'works/social-b2.jpg',type:'image'},
+  ]},
+  { title:'Social Media Content', category:'social', client:'Client C', files:[
+    {src:'works/social-c1.jpg',type:'image'},
+    {src:'works/social-c2.jpg',type:'image'},
+  ]},
+  { title:'Social Media Content', category:'social', client:'Client D', files:[
+    {src:'works/social-d1.jpg',type:'image'},
+    {src:'works/social-d2.jpg',type:'image'},
+  ]},
+
+  // ── APPAREL ──
+  { title:'Merch Collection', category:'apparel', client:'Client A', files:[
+    {src:'works/apparel-a1.jpg',type:'image'},
+    {src:'works/apparel-a2.jpg',type:'image'},
+  ]},
+  { title:'Uniform Design', category:'apparel', client:'Client B', files:[
+    {src:'works/apparel-b1.jpg',type:'image'},
+    {src:'works/apparel-b2.jpg',type:'image'},
+  ]},
+
+  // ── VIDEO (always last) ──
+  { title:'Promo Video', category:'video', client:'Client A', files:[
+    {src:'works/video-a1.mp4',type:'video'},
+  ]},
+  { title:'Brand Video', category:'video', client:'Client B', files:[
+    {src:'works/video-b1.mp4',type:'video'},
+    {src:'works/video-b2.mp4',type:'video'},
+  ]},
+  { title:'Real Estate Tour', category:'video', client:'Client C', files:[
+    {src:'works/video1.mp4',type:'video'},
+    {src:'works/video2.mp4',type:'video'},
+    {src:'works/video3.mp4',type:'video'},
+  ]},
 ];
 
-// ── BUILD CARDS ───────────────────────────────────────────
+// ── Category display labels ──
+const catLabels = {
+  social:'Social Media', apparel:'Apparel', branding:'Branding', print:'Print', video:'Video'
+};
+
+const categories = Object.keys(catLabels);
+
+let activeCategory = 'social';
+
+
+// ── Build cards ──
 const grid = document.getElementById('projectsGrid');
 const timers = {};
 
 projects.forEach((proj, pi) => {
   const card = document.createElement('div');
   card.className = 'project-card visible';
-  card.dataset.filter = proj.filter;
-  card.dataset.index = pi;
+  card.dataset.cat    = proj.category;
+  card.dataset.client = proj.client;
+  card.dataset.index  = pi;
 
   const hasVideo = proj.files.some(f => f.type === 'video');
-  const slideEls = proj.files.map((f, fi) => {
-    if(f.type === 'video'){
-      return `<video class="${fi===0?'active':''}" src="${f.src}" muted playsinline loop></video>`;
-    }
-    return `<img class="${fi===0?'active':''}" src="${f.src}" alt="${proj.title} ${fi+1}"/>`;
-  }).join('');
-
+  const slideEls = proj.files.map((f, fi) =>
+    f.type === 'video'
+      ? `<video class="${fi===0?'active':''}" src="${f.src}" muted playsinline loop></video>`
+      : `<img class="${fi===0?'active':''}" src="${f.src}" alt="${proj.title} ${fi+1}"/>`
+  ).join('');
   const dots = proj.files.length > 1
     ? `<div class="slide-dots">${proj.files.map((_,i)=>`<span class="dot${i===0?' active':''}"></span>`).join('')}</div>`
     : '';
 
   card.innerHTML = `
     <div class="slide-wrap" id="sw${pi}">
-      ${slideEls}
-      ${dots}
+      ${slideEls}${dots}
       ${hasVideo?'<span class="video-badge">▶ Video</span>':''}
     </div>
     <div class="project-info">
-      <p class="project-cat">${proj.cat}</p>
+      <p class="project-cat">${proj.client}</p>
       <p class="project-title">${proj.title}</p>
     </div>`;
 
   card.addEventListener('click', () => openLightbox(pi));
   grid.appendChild(card);
 
-  // auto-slideshow
   if(proj.files.length > 1){
     let cur = 0;
     timers[pi] = setInterval(() => {
       const sw = document.getElementById('sw'+pi);
+      if(!sw) return;
       const els = sw.querySelectorAll('img,video');
       const dotsEl = sw.querySelectorAll('.dot');
       els[cur].classList.remove('active');
@@ -344,19 +364,30 @@ projects.forEach((proj, pi) => {
   }
 });
 
-// ── FILTER ────────────────────────────────────────────────
-document.querySelectorAll('.filter-btn').forEach(btn => {
+// ── Build main tabs ──
+const mainTabsEl = document.getElementById('mainTabs');
+categories.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'main-tab' + (cat === 'social' ? ' active' : '');
+  btn.textContent = catLabels[cat] || cat;
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    activeCategory = cat;
+    mainTabsEl.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.project-card').forEach(c => {
-      c.classList.toggle('visible', f==='all' || c.dataset.filter===f);
-    });
+    filterCards();
   });
+  mainTabsEl.appendChild(btn);
 });
 
-// ── LIGHTBOX ──────────────────────────────────────────────
+function filterCards(){
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.classList.toggle('visible', card.dataset.cat === activeCategory);
+  });
+}
+
+filterCards();
+
+// ── Lightbox ──
 let lbProj = 0, lbIdx = 0;
 const lb = document.getElementById('lightbox');
 const lbMain = document.getElementById('lbMain');
@@ -372,20 +403,13 @@ function openLightbox(pi){
 function renderLb(){
   const proj = projects[lbProj];
   document.getElementById('lbTitle').textContent = proj.title;
-  document.getElementById('lbCat').textContent = proj.cat;
-
-  // main
+  document.getElementById('lbCat').textContent   = proj.client;
   const f = proj.files[lbIdx];
-  lbMain.innerHTML = f.type==='video'
-    ? `<video src="${f.src}" controls autoplay style="max-width:100%;max-height:70vh;border-radius:12px"></video>`
+  lbMain.innerHTML = f.type === 'video'
+    ? `<video src="${f.src}" controls style="max-width:100%;max-height:70vh;border-radius:12px"></video>`
     : `<img src="${f.src}" alt="${proj.title}"/>`;
-
-  // thumbs
   lbThumbs.innerHTML = proj.files.map((fl,i) =>
-    `<img class="lb-thumb${i===lbIdx?' active':''}" src="${fl.type==='video'?'':fl.src}" 
-      data-i="${i}" alt="thumb ${i+1}"
-      style="${fl.type==='video'?'background:#222;display:flex;align-items:center;justify-content:center;':''}"
-    />`
+    `<img class="lb-thumb${i===lbIdx?' active':''}" src="${fl.type==='video'?'':fl.src}" data-i="${i}" alt="thumb ${i+1}" title="${fl.type==='video'?'▶ Video':''}" />`
   ).join('');
   lbThumbs.querySelectorAll('.lb-thumb').forEach(t => {
     t.addEventListener('click', () => { lbIdx = +t.dataset.i; renderLb(); });
@@ -393,7 +417,7 @@ function renderLb(){
 }
 
 document.getElementById('lbClose').addEventListener('click', closeLb);
-lb.addEventListener('click', e => { if(e.target===lb) closeLb(); });
+lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
 document.getElementById('lbPrev').addEventListener('click', () => {
   lbIdx = (lbIdx - 1 + projects[lbProj].files.length) % projects[lbProj].files.length;
   renderLb();
@@ -409,49 +433,45 @@ document.addEventListener('keydown', e => {
   if(e.key==='ArrowRight') document.getElementById('lbNext').click();
 });
 
+function closeLb(){
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbMain.innerHTML = '';
+}
+
 async function submitForm(e){
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
   const msg = document.getElementById('formMsg');
   const form = document.getElementById('contactForm');
   const data = {
-    name: form.querySelector('[name="name"]').value,
-    email: form.querySelector('[name="email"]').value,
+    name:    form.querySelector('[name="name"]').value,
+    email:   form.querySelector('[name="email"]').value,
     subject: form.querySelector('[name="subject"]').value,
     message: form.querySelector('[name="message"]').value
   };
   if(!data.name||!data.email||!data.message){
-    msg.style.display='block';msg.style.color='#c0392b';
-    msg.textContent='Please fill in all required fields.';return;
+    msg.style.display='block'; msg.style.color='#c0392b';
+    msg.textContent='Please fill in all required fields.'; return;
   }
-  btn.textContent='Sending...';btn.disabled=true;
+  btn.textContent='Sending...'; btn.disabled=true;
   try{
     const res = await fetch('https://formspree.io/f/xvzlrvzw',{
-      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify(data)
     });
     if(res.ok){
-      msg.style.display='block';msg.style.color='var(--sage-dark)';
-      msg.textContent='✓ Message sent! I\'ll get back to you soon.';
-      form.querySelectorAll('input,textarea').forEach(el=>el.value='');
-      btn.textContent='Send Message';btn.disabled=false;
-    } else {
-      throw new Error();
-    }
-  } catch{
-    msg.style.display='block';msg.style.color='#c0392b';
+      msg.style.display='block'; msg.style.color='var(--sage-dark)';
+      msg.textContent="✓ Message sent! I'll get back to you soon.";
+      form.querySelectorAll('input,textarea').forEach(el => el.value='');
+      btn.textContent='Send Message'; btn.disabled=false;
+    } else { throw new Error(); }
+  } catch {
+    msg.style.display='block'; msg.style.color='#c0392b';
     msg.textContent='Something went wrong. Please email me directly.';
-    btn.textContent='Send Message';btn.disabled=false;
+    btn.textContent='Send Message'; btn.disabled=false;
   }
-}
-
-function closeLb(){
-  lb.classList.remove('open');
-  document.body.style.overflow='';
-  lbMain.innerHTML='';
 }
 </script>
 </body>
 </html>
-
-
