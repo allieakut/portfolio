@@ -46,16 +46,10 @@ section{padding:6rem 8%}
 .service-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;margin-bottom:0.6rem}
 .service-card p{font-size:0.85rem;color:var(--text-muted);line-height:1.7}
 
-/* WORK */
 #work{background:var(--bg)}
-
-/* Level 1 - main category tabs */
-.main-tabs{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem}
-.main-tab{padding:0.55rem 1.4rem;border-radius:50px;border:1px solid rgba(138,158,138,0.4);background:transparent;font-family:'DM Sans',sans-serif;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all 0.3s}
-.main-tab:hover,.main-tab.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
-
-
-
+.filter-tabs{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.5rem}
+.filter-btn{padding:0.5rem 1.3rem;border-radius:50px;border:1px solid rgba(138,158,138,0.4);background:transparent;font-family:'DM Sans',sans-serif;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all 0.3s}
+.filter-btn:hover,.filter-btn.active{background:var(--sage);color:var(--white);border-color:var(--sage)}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
 .project-card{border-radius:14px;overflow:hidden;cursor:pointer;background:var(--white);box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:transform 0.3s,box-shadow 0.3s;display:none}
 .project-card.visible{display:block}
@@ -161,9 +155,13 @@ footer span{color:var(--sage)}
 <section id="work">
   <p class="section-label">Portfolio</p>
   <h2 class="section-title">Selected Work</h2>
-
-  <div class="main-tabs" id="mainTabs"></div>
-
+  <div class="filter-tabs">
+    <button class="filter-btn active" data-filter="social">Social Media</button>
+    <button class="filter-btn" data-filter="apparel">Apparel</button>
+    <button class="filter-btn" data-filter="branding">Branding</button>
+    <button class="filter-btn" data-filter="print">Print</button>
+    <button class="filter-btn" data-filter="video">Video</button>
+  </div>
   <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
@@ -229,90 +227,67 @@ footer span{color:var(--sage)}
 
 <script>
 // ═══════════════════════════════════════════════
-// PROJECT DATA
-// category: main tab key
-// client:   sub-tab name (the company/client name)
-// Replace placeholder names & filenames with your real ones!
+// YOUR PROJECT DATA — replace filenames with your real ones!
+// Images: works/filename.jpg   Videos: works/filename.mp4
+// filter options: 'social' | 'apparel' | 'branding' | 'print' | 'video'
 // ═══════════════════════════════════════════════
 const projects = [
-  // ── BRANDING ──
-  { title:'Brand Launch', category:'branding', client:'Client A', files:[
-    {src:'works/branding-a1.jpg',type:'image'},
-    {src:'works/branding-a2.jpg',type:'image'},
-  ]},
-  { title:'Visual Identity', category:'branding', client:'Client B', files:[
-    {src:'works/branding-b1.jpg',type:'image'},
-    {src:'works/branding-b2.jpg',type:'image'},
-    {src:'works/branding-b3.jpg',type:'image'},
-  ]},
-  { title:'Logo & Style Guide', category:'branding', client:'Client C', files:[
-    {src:'works/branding-c1.jpg',type:'image'},
-    {src:'works/branding-c2.jpg',type:'image'},
-  ]},
-
-  // ── PRINT ──
-  { title:'Event Posters', category:'print', client:'Client A', files:[
-    {src:'works/print-a1.jpg',type:'image'},
-    {src:'works/print-a2.jpg',type:'image'},
-  ]},
-  { title:'Magazine Layout', category:'print', client:'Client B', files:[
-    {src:'works/print-b1.jpg',type:'image'},
-    {src:'works/print-b2.jpg',type:'image'},
-  ]},
-
-  // ── SOCIAL MEDIA ──
-  { title:'Social Media Content', category:'social', client:'Client A', files:[
+  // SOCIAL MEDIA
+  { title:'Social Media Content', cat:'Social Media', filter:'social', files:[
     {src:'works/social-a1.jpg',type:'image'},
     {src:'works/social-a2.jpg',type:'image'},
     {src:'works/social-a3.jpg',type:'image'},
   ]},
-  { title:'Social Media Content', category:'social', client:'Client B', files:[
+  { title:'Social Media Content', cat:'Social Media', filter:'social', files:[
     {src:'works/social-b1.jpg',type:'image'},
     {src:'works/social-b2.jpg',type:'image'},
   ]},
-  { title:'Social Media Content', category:'social', client:'Client C', files:[
+  { title:'Social Media Content', cat:'Social Media', filter:'social', files:[
     {src:'works/social-c1.jpg',type:'image'},
     {src:'works/social-c2.jpg',type:'image'},
   ]},
-  { title:'Social Media Content', category:'social', client:'Client D', files:[
+  { title:'Social Media Content', cat:'Social Media', filter:'social', files:[
     {src:'works/social-d1.jpg',type:'image'},
     {src:'works/social-d2.jpg',type:'image'},
   ]},
 
-  // ── APPAREL ──
-  { title:'Merch Collection', category:'apparel', client:'Client A', files:[
+  // APPAREL
+  { title:'Merch Collection', cat:'Apparel', filter:'apparel', files:[
     {src:'works/apparel-a1.jpg',type:'image'},
     {src:'works/apparel-a2.jpg',type:'image'},
   ]},
-  { title:'Uniform Design', category:'apparel', client:'Client B', files:[
+  { title:'Uniform Design', cat:'Apparel', filter:'apparel', files:[
     {src:'works/apparel-b1.jpg',type:'image'},
     {src:'works/apparel-b2.jpg',type:'image'},
   ]},
 
-  // ── VIDEO (always last) ──
-  { title:'Promo Video', category:'video', client:'Client A', files:[
-    {src:'works/video-a1.mp4',type:'video'},
+  // BRANDING
+  { title:'Brand Identity', cat:'Branding', filter:'branding', files:[
+    {src:'works/branding-a1.jpg',type:'image'},
+    {src:'works/branding-a2.jpg',type:'image'},
   ]},
-  { title:'Brand Video', category:'video', client:'Client B', files:[
-    {src:'works/video-b1.mp4',type:'video'},
-    {src:'works/video-b2.mp4',type:'video'},
+  { title:'Logo & Style Guide', cat:'Branding', filter:'branding', files:[
+    {src:'works/branding-b1.jpg',type:'image'},
+    {src:'works/branding-b2.jpg',type:'image'},
   ]},
-  { title:'Real Estate Tour', category:'video', client:'Client C', files:[
+
+  // PRINT
+  { title:'Event Posters', cat:'Print', filter:'print', files:[
+    {src:'works/print-a1.jpg',type:'image'},
+    {src:'works/print-a2.jpg',type:'image'},
+  ]},
+  { title:'Magazine Layout', cat:'Print', filter:'print', files:[
+    {src:'works/print-b1.jpg',type:'image'},
+    {src:'works/print-b2.jpg',type:'image'},
+  ]},
+
+  // VIDEO — always last
+  { title:'Real Estate', cat:'Video', filter:'video', files:[
     {src:'works/video1.mp4',type:'video'},
     {src:'works/video2.mp4',type:'video'},
     {src:'works/video3.mp4',type:'video'},
   ]},
 ];
-
-// ── Category display labels ──
-const catLabels = {
-  social:'Social Media', apparel:'Apparel', branding:'Branding', print:'Print', video:'Video'
-};
-
-const categories = Object.keys(catLabels);
-
-let activeCategory = 'social';
-
 
 // ── Build cards ──
 const grid = document.getElementById('projectsGrid');
@@ -320,9 +295,8 @@ const timers = {};
 
 projects.forEach((proj, pi) => {
   const card = document.createElement('div');
-  card.className = 'project-card visible';
-  card.dataset.cat    = proj.category;
-  card.dataset.client = proj.client;
+  card.className = 'project-card' + (proj.filter === 'social' ? ' visible' : '');
+  card.dataset.filter = proj.filter;
   card.dataset.index  = pi;
 
   const hasVideo = proj.files.some(f => f.type === 'video');
@@ -341,7 +315,7 @@ projects.forEach((proj, pi) => {
       ${hasVideo?'<span class="video-badge">▶ Video</span>':''}
     </div>
     <div class="project-info">
-      <p class="project-cat">${proj.client}</p>
+      <p class="project-cat">${proj.cat}</p>
       <p class="project-title">${proj.title}</p>
     </div>`;
 
@@ -364,28 +338,17 @@ projects.forEach((proj, pi) => {
   }
 });
 
-// ── Build main tabs ──
-const mainTabsEl = document.getElementById('mainTabs');
-categories.forEach(cat => {
-  const btn = document.createElement('button');
-  btn.className = 'main-tab' + (cat === 'social' ? ' active' : '');
-  btn.textContent = catLabels[cat] || cat;
+// ── Filter tabs ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    activeCategory = cat;
-    mainTabsEl.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    filterCards();
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(c => {
+      c.classList.toggle('visible', c.dataset.filter === f);
+    });
   });
-  mainTabsEl.appendChild(btn);
 });
-
-function filterCards(){
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.classList.toggle('visible', card.dataset.cat === activeCategory);
-  });
-}
-
-filterCards();
 
 // ── Lightbox ──
 let lbProj = 0, lbIdx = 0;
@@ -393,84 +356,48 @@ const lb = document.getElementById('lightbox');
 const lbMain = document.getElementById('lbMain');
 const lbThumbs = document.getElementById('lbThumbs');
 
-function openLightbox(pi){
-  lbProj = pi; lbIdx = 0;
-  renderLb();
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+function openLightbox(pi){ lbProj=pi; lbIdx=0; renderLb(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
 
 function renderLb(){
   const proj = projects[lbProj];
   document.getElementById('lbTitle').textContent = proj.title;
-  document.getElementById('lbCat').textContent   = proj.client;
+  document.getElementById('lbCat').textContent   = proj.cat;
   const f = proj.files[lbIdx];
-  lbMain.innerHTML = f.type === 'video'
+  lbMain.innerHTML = f.type==='video'
     ? `<video src="${f.src}" controls style="max-width:100%;max-height:70vh;border-radius:12px"></video>`
     : `<img src="${f.src}" alt="${proj.title}"/>`;
-  lbThumbs.innerHTML = proj.files.map((fl,i) =>
-    `<img class="lb-thumb${i===lbIdx?' active':''}" src="${fl.type==='video'?'':fl.src}" data-i="${i}" alt="thumb ${i+1}" title="${fl.type==='video'?'▶ Video':''}" />`
+  lbThumbs.innerHTML = proj.files.map((fl,i)=>
+    `<img class="lb-thumb${i===lbIdx?' active':''}" src="${fl.type==='video'?'':fl.src}" data-i="${i}" alt="thumb ${i+1}"/>`
   ).join('');
-  lbThumbs.querySelectorAll('.lb-thumb').forEach(t => {
-    t.addEventListener('click', () => { lbIdx = +t.dataset.i; renderLb(); });
+  lbThumbs.querySelectorAll('.lb-thumb').forEach(t=>{
+    t.addEventListener('click',()=>{ lbIdx=+t.dataset.i; renderLb(); });
   });
 }
 
 document.getElementById('lbClose').addEventListener('click', closeLb);
-lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
-document.getElementById('lbPrev').addEventListener('click', () => {
-  lbIdx = (lbIdx - 1 + projects[lbProj].files.length) % projects[lbProj].files.length;
-  renderLb();
-});
-document.getElementById('lbNext').addEventListener('click', () => {
-  lbIdx = (lbIdx + 1) % projects[lbProj].files.length;
-  renderLb();
-});
-document.addEventListener('keydown', e => {
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+document.getElementById('lbPrev').addEventListener('click',()=>{ lbIdx=(lbIdx-1+projects[lbProj].files.length)%projects[lbProj].files.length; renderLb(); });
+document.getElementById('lbNext').addEventListener('click',()=>{ lbIdx=(lbIdx+1)%projects[lbProj].files.length; renderLb(); });
+document.addEventListener('keydown', e=>{
   if(!lb.classList.contains('open')) return;
   if(e.key==='Escape') closeLb();
   if(e.key==='ArrowLeft') document.getElementById('lbPrev').click();
   if(e.key==='ArrowRight') document.getElementById('lbNext').click();
 });
 
-function closeLb(){
-  lb.classList.remove('open');
-  document.body.style.overflow = '';
-  lbMain.innerHTML = '';
-}
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; lbMain.innerHTML=''; }
 
 async function submitForm(e){
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  const msg = document.getElementById('formMsg');
-  const form = document.getElementById('contactForm');
-  const data = {
-    name:    form.querySelector('[name="name"]').value,
-    email:   form.querySelector('[name="email"]').value,
-    subject: form.querySelector('[name="subject"]').value,
-    message: form.querySelector('[name="message"]').value
-  };
-  if(!data.name||!data.email||!data.message){
-    msg.style.display='block'; msg.style.color='#c0392b';
-    msg.textContent='Please fill in all required fields.'; return;
-  }
+  const btn=document.getElementById('submitBtn'), msg=document.getElementById('formMsg'), form=document.getElementById('contactForm');
+  const data={ name:form.querySelector('[name="name"]').value, email:form.querySelector('[name="email"]').value, subject:form.querySelector('[name="subject"]').value, message:form.querySelector('[name="message"]').value };
+  if(!data.name||!data.email||!data.message){ msg.style.display='block'; msg.style.color='#c0392b'; msg.textContent='Please fill in all required fields.'; return; }
   btn.textContent='Sending...'; btn.disabled=true;
   try{
-    const res = await fetch('https://formspree.io/f/xvzlrvzw',{
-      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(data)
-    });
-    if(res.ok){
-      msg.style.display='block'; msg.style.color='var(--sage-dark)';
-      msg.textContent="✓ Message sent! I'll get back to you soon.";
-      form.querySelectorAll('input,textarea').forEach(el => el.value='');
-      btn.textContent='Send Message'; btn.disabled=false;
-    } else { throw new Error(); }
-  } catch {
-    msg.style.display='block'; msg.style.color='#c0392b';
-    msg.textContent='Something went wrong. Please email me directly.';
-    btn.textContent='Send Message'; btn.disabled=false;
-  }
+    const res=await fetch('https://formspree.io/f/xvzlrvzw',{ method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify(data) });
+    if(res.ok){ msg.style.display='block'; msg.style.color='var(--sage-dark)'; msg.textContent="✓ Message sent! I'll get back to you soon."; form.querySelectorAll('input,textarea').forEach(el=>el.value=''); btn.textContent='Send Message'; btn.disabled=false; }
+    else { throw new Error(); }
+  } catch { msg.style.display='block'; msg.style.color='#c0392b'; msg.textContent='Something went wrong. Please email me directly.'; btn.textContent='Send Message'; btn.disabled=false; }
 }
 </script>
 </body>
